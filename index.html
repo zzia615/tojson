@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <meta name="keywords" content="JSON,在线JSON,JSON 校验,格式化,xml转json 工具,在线工具,json视图,可视化,程序,服务器,域名注册,正则表达式,测试,在线json格式化工具,json 格式化,json格式化工具,json字符串格式化,json 在线查看器,json在线,json 在线验证,json tools online,在线文字对比工具,jsonparse" />
+    <meta name="description" content="在线,JSON,JSON 校验,格式化,xml转json 工具,在线工具,json视图,可视化,程序,服务器,域名注册,正则表达式,测试,在线json格式化工具,json 格式化,json格式化工具,json字符串格式化,json 在线查看器,json在线,json 在线验证,json tools online,在线文字对比工具" />
+    <script src="https://unpkg.com/vue@next"></script>
+    <!-- import CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/element-plus/lib/theme-chalk/index.css">
+    <link href="json-viewer/jquery.json-viewer.css" rel="stylesheet" />
+    <link href="prism/prism.css" rel="stylesheet" />
+    <!-- import JavaScript -->
+    <script src="https://unpkg.com/element-plus/lib/index.full.js"></script>
+    <!--<script src="https://unpkg.com/axios/dist/axios.min.js"></script>-->
+    <script src="json-viewer/jquery-3.3.1.min.js"></script>
+    <script src="json-viewer/jquery.json-viewer.js"></script>
+    <script src="prism/prism.js"></script>
+    <title>JSON在线格式化（jaylosy.com）</title>
+    <style>
+        pre#json-renderer {
+            border: 0.1px solid #aaa;
+            padding: 0;
+            margin: 0;
+            height: 500px;
+            overflow-y: auto;
+        }
+
+        textarea {
+            height: 500px;
+            overflow-y: auto;
+        }
+
+        .el-col {
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <el-card class="box-card">
+            <template #header>
+                <div class="card-header">
+                    <h2>JSON在线格式化</h2>
+                    <div>
+                        <span>喜欢的请收藏本网站:<span style="color:red;">Ctrl+D</span></span>
+                    </div>
+                </div>
+            </template>
+            <div>
+                <div>
+                    <el-button type="primary" @click="renderJson">格式化</el-button>
+                </div>
+                <el-row>
+                    <el-col :span="12">
+                        <el-input type="textarea"
+                                  :rows="10"
+                                  placeholder="请输入JSON字符串"
+                                  v-model="textarea">
+                        </el-input>
+                    </el-col>
+                    <el-col :span="12">
+                        <pre id="json-renderer" class="language-json"></pre>
+                    </el-col>
+                </el-row>
+                <div>
+                    <p style="color:red;">{{jsonerror}}</p>
+                </div>
+                <div>
+                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><br />
+                    <!-- 展示广告 --><br />
+                    <ins class="adsbygoogle" style="display: block;" data-ad-client="ca-pub-4071258681370069" data-ad-slot="8375233130" data-ad-format="auto" data-full-width-responsive="true"></ins><br />
+                    <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
+            </div>
+        </el-card>
+    </div>
+    <script>
+        const App = {
+            data() {
+                return {
+                    textarea: '',
+                    jsonerror:''
+                }
+            },
+            methods: {
+                renderJson() {
+                    this.jsonerror = "";
+                    try {
+                        var input = eval('(' +this.textarea+')');
+                    }
+                    catch (error) {
+                        this.jsonerror = "Cannot eval JSON: " + error;
+                        return;
+                    }
+
+                    try {
+                        JSON.parse(this.textarea);
+                    }
+                    catch (error) {
+                        this.jsonerror = error;
+                    }
+
+
+                    var options = {
+                        collapsed: false,
+                        rootCollapsable: true,
+                        withQuotes: true,
+                        withLinks: false
+                    };
+                    $('#json-renderer').jsonViewer(input, options);
+                }
+            },
+            mounted() {
+                //this.renderJson();
+            }
+        };
+        const app = Vue.createApp(App);
+        app.use(ElementPlus);
+        app.mount("#app");
+    </script>
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?872d0dabccffed283ee7a6519c38ca45";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+
+</body>
+</html>
+
